@@ -1,0 +1,338 @@
+/* --- スマホなど、画面が縦長（幅が狭い）のときの指示 --- */
+@media (max-width: 767px) {
+    .easel-container {
+        display: none; /* ここでイーゼル（と中身の動画）を消す */
+    }
+    
+    /* 必要であればキャラクター画像だけ中央に寄せる */
+    .main-02 {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* header--------------------------------------- */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* ここで高さを50pxに固定 */
+    background-color: #ffffff;
+    z-index: 1000;
+    
+    display: flex;
+    justify-content: space-between; /* ロゴとメニューを両端へ */
+    align-items: center;            /* 縦方向のど真ん中へ */
+    
+    padding: 0 20px;                /* 左右の余白は固定値で指定 */
+    box-sizing: border-box;         /* paddingを含めて50pxにする重要設定 */
+    flex-wrap: nowrap;              /* 絶対に折り返さない */
+}
+
+.logo {
+    white-space: nowrap;            /* ロゴも折り返させない */
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px;                      /* リンク間の隙間を少し詰める */
+    margin: 0;                      /* 余計な隙間を削除 */
+    padding: 0;
+    white-space: nowrap;            /* メニューも折り返させない */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* マウスオーバー時：新緑色 */
+.nav-links a:hover {
+    color: #228b22;                 /* フォレストグリーン（新緑色） */
+}
+
+
+
+/* 1. スクロールの基準となる親要素の設定 */
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll; /* 常にスクロールバーを表示させる */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: auto; /* ここを固定しない */
+}
+
+    /* ライトボックスが開いたときに、さらにズレないように調整 */
+    .glightbox-open {
+        overflow: hidden; /* ライトボックス表示中の無駄なスクロールを止める */
+    }
+
+
+/* 2. mainタグに高さを確保させる */
+main {
+    position: relative;
+    /* mainがsectionをすべて囲い込めるようにする */
+}
+
+/* 3. sectionの定義 */
+.bg-section {
+    position: sticky;
+    top: -3vh;
+    height: 100vh;
+    width: 100%;
+    z-index: 1; /* heroが一番下になるよう後で調整 */
+    background-size: cover;
+    background-position: center;
+
+}
+
+/* 4. 重なりの順番 */
+.hero { z-index: 10; 
+    background-image: url('images/backimage/bg01.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
+    padding-top: 20px; /* 必要に応じてさらに余白を追加 */
+}
+
+.works { z-index: 50; 
+    background-image: url('images/backimage/bg02.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
+    padding-top: 20px; /* 必要に応じてさらに余白を追加 */
+        /* 境界線をぼかして溶け込ませる */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
+}
+
+.about {
+    z-index: 100;
+    /* 画像とグラデーションを削除 */
+    background-image: none; 
+    background-color: #abc592; /* 明るい若葉色 */
+    
+    /* マスクを解除 */
+    -webkit-mask-image: none;
+    mask-image: none;
+    
+    /* 領域の高さを抑える */
+    height: auto; 
+    min-height: 75px; /* 4行分くらいの高さを確保 */
+    padding: 40px 20px;
+    
+    /* 柔軟に配置 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    margin-top: 50px;
+}
+/* hero---------------------------------------------------- */
+.hero-main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 60px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
+}
+
+/* イーゼルと動画を包む箱 */
+.easel-container {
+    position: relative; /* 子要素（動画）を上に乗せるための基準点 */
+    width: 47%;         /* イーゼルの幅をここで一括管理 */
+}
+
+.easel-container .main-01 {
+    position: relative; /* 子要素（動画）を上に乗せるための基準点 */
+    width: 100%;         /* イーゼルの幅をここで一括管理 */
+}
+
+/* 動画をイーゼル内に配置 */
+.easel-video-wrap {
+    position: absolute; /* 親箱の左上に固定 */
+    top: 17%;    /* 数値を大きくすると下に移動します */
+    left: 20%;  /* 数値を大きくすると右に移動します */
+    
+    width: 90%;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    z-index: 11;
+}
+
+        /* iframe（YouTubeそのもの）への絶対命令 */
+        .easel-video-wrap iframe {
+            width: 58%;
+            height: 58%;
+            /* 動画の比率を保ったまま、箱の中に収める */
+            object-fit: contain; 
+            border: none;
+        }
+
+    /* キャラクターのサイズ指定 */
+    .hero-main .main-02 {
+        width: 53%;       /* 幅をイーゼルより少し大きく） */
+        height: auto;
+        transition: transform 0.3s ease; /* 動きを滑らかにする */
+    }
+
+    /* マウスが乗ったとき（:hover）の挙動 */
+    .hero-main .main-02:hover {
+        animation: herojump 0.4s ease; /* jumpという名前のアニメーションを実行 */
+    }
+
+    /* 動きの正体（キーフレーム） */
+    @keyframes herojump {
+        0% { transform: translateY(0) scale(1) ; }       /* 元の位置 */
+        50% { transform: translateY(-20px) scale(1.02) ; }  /* 20px上に跳ねる */
+        100% { transform: translateY(0) scale(1) ; }     /* 元に戻る */
+    }
+    
+
+/* works------------------------------------------------- */
+
+.section-title {
+    /* フォント設定：モダンなブロック体 */
+    font-family: 'Noto Sans JP';
+    font-size: 2.5rem;       /* サイズはお好みで調整してください */
+    letter-spacing: 0.1em; /* 文字間隔を広げてスタイリッシュに */
+    
+    position: absolute;   /* 親（work-logo）の中で浮かせます */
+    margin: 0;            /* デフォルトの余白を消す */
+    left: 50%;                 /* 画面の50%の地点を起点にする */
+
+    top: -30px;          /* ここを基準に上下させます */
+    margin-top: 0;     /* marginはリセット */
+
+
+
+    transform: translateX(-50%); /* 自分の幅の半分だけ左にずらす */
+    /* 文字の色 */
+    color: #ffffff; 
+    
+    /* 影の設定：彩度の低い濃緑、透明度40% */
+    /* text-shadow: 横 縦 ぼかし色 */
+    text-shadow: 0px 4px 0px rgba(0, 100, 0, 0.4); 
+    
+    /* 中央寄せしたい場合 */
+    text-align: center;
+    margin: 20px 0;
+}
+
+    .work-logo {
+    position: relative;
+    display: flex;
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center;      /* 縦方向の中央揃え（必要であれば） */
+
+     margin-top: 120px;  
+
+    }
+
+
+
+    /* ラインのサイズ指定 */
+    .work-logo .deco-line {
+        width: 500px;       
+        height: auto;
+        transition: transform 0.3s ease; /* 動きを滑らかにする */
+        flex-shrink: 0;
+    }
+
+    /* ★サムネイルのソート指定 */
+        .works-thumbnail-sort {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px 30px;
+        max-width: 950px;
+        margin: 0 auto;
+        margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
+        
+}
+
+            /* 1. 通常のサムネイルの状態 */
+            .works-thumbnail-sort a img {
+                /* アニメーションの時間を設定（ふわっと動かすため） */
+                transition: filter 0.3s ease, opacity 0.3s ease; 
+                
+                /* 念のため初期状態を設定 */
+                filter: brightness(100%); 
+                opacity: 1;
+            }
+
+            /* 2. サムネイルにカーソルが乗ったとき（ホバー時）の状態 */
+                    /* 1. 通常のサムネイルは白く光る */
+                    .works-thumbnail-sort a:not(.dark-hover):hover img {
+                        filter: brightness(130%);
+                        transform: translateY(1px);
+                        transition: filter 0.3s ease, transform 0.3s ease;
+                    }
+
+                    /* 2. dark-hoverクラスを持つリンクだけは暗くなる */
+                    .works-thumbnail-sort a.dark-hover:hover img {
+                        filter: brightness(40%);
+                        transform: translateY(1px);
+                        transition: filter 0.3s ease, transform 0.3s ease;
+                    }
+
+                    /* 吹き出しの配置 */
+                    .works-thumbnail-sort a {
+                        position: relative; /* 吹き出しを中に置くための基準 */
+                    }
+
+                    .tap-bubble {
+                        position: absolute;
+                        top: 5px;   /* サムネイルの上に少しはみ出させる */
+                        left: 6%;
+                        transform: translateX(-50%);
+                        width: 50px;  /* 必要に応じて調整 */
+                        z-index: 51;  /* 画像より上に表示 */
+                        
+                        /* ぴょこぴょこアニメーション */
+                        animation: pyoko 1.5s infinite ease-in-out;
+                    }
+
+                    /* アニメーションの定義 */
+                    @keyframes pyoko {
+                        0%, 100% { transform: translateX(-50%) translateY(0); }
+                        50% { transform: translateX(-50%) translateY(-10px); } /* 10px上に跳ねる */
+                    }
+/* about------------------------------------------------- */
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: column; /* 【重要】これで縦並びを確定させます */
+    align-items: center;    /* 横方向は中央揃え */
+    width: 100%;
+    margin-top: -60px;      /* 食い込ませる量 */
+}
+
+.footer-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 950px;
+}
+
+.about-text {
+    margin-top: 7px; /* ラインとXアイコンの距離 */
+}
+
+/* ライン素材の幅を調整 */
+.deco-left, .deco-right { width: 80px; }
+.deco-center { flex-grow: 1; height: 30px; object-fit: contain; }
