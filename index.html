@@ -4,213 +4,438 @@
     <meta charset="UTF-8">
     <title>HPYWEDNG Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 </head>
 <body>
 
 <header class="main-header">
     <div class="logo">HpyWedng</div>
-    <nav>
-    </nav>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-
+    
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="キーワードを入力...">
+        <button id="search-btn">検索</button>
+    </div>
 </header>
 
-    <main>
+<main>
     <section class="bg-section hero" id="top">
+        <img src="images/deco/19flag.png" class="deco-flag" alt="">
+        <img src="images/deco/19flag.png" class="deco-flag02" alt="">
+        <img src="images/deco/20efect.png" class="deco-effect" alt="">
+        <img src="images/deco/cafe02.png" class="deco-cafe02" alt="">
+        <img src="images/deco/cafe04.png" class="deco-cafe04" alt="">
+        <img src="images/deco/cafe01.png" class="deco-cafe01" alt="">
+
         <div class="hero-main">
             <div class="easel-container">
-
                 <img src="images/deco/18eazel-size-shadow.png" class="main-01">
-                
                 <div class="easel-video-wrap">
-                    <iframe src="https://www.youtube.com/embed/0myJ7A0au2I" ...></iframe>
+                    <iframe src="https://www.youtube.com/embed/0myJ7A0au2I" frameborder="0" allowfullscreen></iframe>
                 </div>
-
             </div>
-
-            <img src="images\deco\kotoricard.png" class="main-02">
-
+            <img src="images/deco/kotoricard.png" class="main-02">
         </div>
-
-
-        </section>
+    </section>
         
     <section class="bg-section works" id="works">
+        <div class="deco-container">
+            <div class="deco-item slide-from-left item-01"><img src="images/deco/01art.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-left item-03"><img src="images/deco/10ps.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-left item-04"><img src="images/deco/11pentab.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-left char-01"><img src="images/deco/01c.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-left char-03"><img src="images/deco/03c.png" class="deco-inner"></div>
+
+            <div class="deco-item slide-from-right item-02"><img src="images/deco/09clst.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-right item-05"><img src="images/deco/12tourbox.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-right item-06"><img src="images/deco/03pekora.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-right item-07"><img src="images/deco/04hito.png" class="deco-inner"></div>
+            <div class="deco-item slide-from-right char-02"><img src="images/deco/02c.png" class="deco-inner"></div>
+        </div>
+
         <div class="work-logo">
             <img src="images/logo/line01.png" class="deco-line">
-                <h2 class="section-title">WORKS</h2>
-         </div>   
+            <h2 class="section-title">WORKS</h2>
+        </div>   
 
+        <div class="works-thumbnail-sort">
+            <a href="images/works/001.png" class="glightbox" data-gallery="my-work-001">
+                <img src="images/thumbnail/tap50px.png" class="tap-bubble">
+                <img src="images/thumbnail/001.png" alt="ことり" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/0myJ7A0au2I" class="glightbox" data-gallery="my-work-001" style="display:none;"></a>
 
-         
-<div class="works-thumbnail-sort">
+            <a href="images/works/002.png" class="glightbox" data-gallery="my-work-002">
+                <img src="images/thumbnail/002.png" alt="さくら" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/nMEALQRb7ug" class="glightbox" data-gallery="my-work-002" style="display:none;"></a>
 
-<!-- 001-010 -->
+            <a href="images/works/025.png" class="glightbox" data-gallery="my-work-025">
+                <img src="images/thumbnail/025.png" alt="でふぉるめ" style="width: 100px; height: auto;">
+            </a>
+            <a href="images/her/strawberry-nazo.png" id="strawberry-nazo-link" style="display:none;"></a>
+            
+            <a href="images/works/003.png" class="glightbox" data-gallery="my-work-003">
+                <img src="images/thumbnail/003.png" alt="はりこ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/TExK66R8UAA" class="glightbox" data-gallery="my-work-003" style="display:none;"></a>
 
-<a href="images/works/001.png" class="glightbox" data-gallery="my-work-001">
-    <img src="images/thumbnail/tap50px.png" class="tap-bubble">
-    <img src="images/thumbnail/001.png" alt="ことり" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtu.be/0myJ7A0au2I" class="glightbox" data-gallery="my-work-001" style="display:none;"></a>
+            <a href="images/works/004.png" class="glightbox" data-gallery="my-work-004">
+                <img src="images/thumbnail/004.png" alt="まじょ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/zxkLyS-t59g" class="glightbox" data-gallery="my-work-004" style="display:none;"></a>
 
+            <a href="images/works/005.png" class="glightbox" data-gallery="my-work-005">
+                <img src="images/thumbnail/005.png" alt="かのこ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/zmTVvSzhlrc" class="glightbox" data-gallery="my-work-005" style="display:none;"></a>
 
-<a href="images/works/002.png" class="glightbox" data-gallery="my-work-002">
-    <img src="images/thumbnail/002.png" alt="さくら" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/nMEALQRb7ug" class="glightbox" data-gallery="my-work-002" style="display:none;"></a>
+            <a href="images/works/006.png" class="glightbox" data-gallery="my-work-006">
+                <img src="images/thumbnail/006.png" alt="くらげ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/sXVlapxLWSE" class="glightbox" data-gallery="my-work-006" style="display:none;"></a>
 
-<a href="images/works/003.png" class="glightbox" data-gallery="my-work-003">
-    <img src="images/thumbnail/003.png" alt="はりこ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/TExK66R8UAA" class="glightbox" data-gallery="my-work-003" style="display:none;"></a>
+            <a href="images/works/007.png" class="glightbox" data-gallery="my-work-007">
+                <img src="images/thumbnail/007.png" alt="くるみ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/jT1V2KjX2VA" class="glightbox" data-gallery="my-work-007" style="display:none;"></a>
 
-<a href="images/works/004.png" class="glightbox" data-gallery="my-work-004">
-    <img src="images/thumbnail/004.png" alt="まじょ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/zxkLyS-t59g" class="glightbox" data-gallery="my-work-004" style="display:none;"></a>
+            <a href="images/works/008.png" class="glightbox" data-gallery="my-work-008">
+                <img src="images/thumbnail/008.png" alt="うさぎ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/DXDZ40CQ418" class="glightbox" data-gallery="my-work-008" style="display:none;"></a>
 
-<a href="images/works/005.png" class="glightbox" data-gallery="my-work-005">
-    <img src="images/thumbnail/005.png" alt="かのこ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/zmTVvSzhlrc" class="glightbox" data-gallery="my-work-005" style="display:none;"></a>
+            <a href="images/works/009.png" class="glightbox" data-gallery="my-work-009">
+                <img src="images/thumbnail/009.png" alt="ぱーかー" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/bwlxPPpi23w" class="glightbox" data-gallery="my-work-009" style="display:none;"></a>
 
-<a href="images/works/006.png" class="glightbox" data-gallery="my-work-006">
-    <img src="images/thumbnail/006.png" alt="くらげ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/sXVlapxLWSE" class="glightbox" data-gallery="my-work-006" style="display:none;"></a>
+            <a href="images/works/010.png" class="glightbox" data-gallery="my-work-010">
+                <img src="images/thumbnail/010.png" alt="じゅう" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/hR6_Tdismns" class="glightbox" data-gallery="my-work-010" style="display:none;"></a>
 
-<a href="images/works/007.png" class="glightbox" data-gallery="my-work-007">
-    <img src="images/thumbnail/007.png" alt="くるみ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/jT1V2KjX2VA" class="glightbox" data-gallery="my-work-007" style="display:none;"></a>
+            <a href="images/works/011.png" class="glightbox" data-gallery="my-work-011">
+                <img src="images/thumbnail/011.png" alt="ねずみ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/oSs656xwWOw" class="glightbox" data-gallery="my-work-011" style="display:none;"></a>
 
-<a href="images/works/008.png" class="glightbox" data-gallery="my-work-008">
-    <img src="images/thumbnail/008.png" alt="うさぎ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/DXDZ40CQ418" class="glightbox" data-gallery="my-work-008" style="display:none;"></a>
+            <a href="images/works/012.png" class="glightbox" data-gallery="my-work-012">
+                <img src="images/thumbnail/012.png" alt="みぎて" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/gpW8Cj2L4XI" class="glightbox" data-gallery="my-work-012" style="display:none;"></a>
 
-<a href="images/works/009.png" class="glightbox" data-gallery="my-work-009">
-    <img src="images/thumbnail/009.png" alt="ぱーかー" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/bwlxPPpi23w" class="glightbox" data-gallery="my-work-009" style="display:none;"></a>
+            <a href="images/works/013.png" class="glightbox" data-gallery="my-work-013">
+                <img src="images/thumbnail/013.png" alt="かたな" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/WYcnNgAtpzM" class="glightbox" data-gallery="my-work-013" style="display:none;"></a>
 
-<a href="images/works/010.png" class="glightbox" data-gallery="my-work-010">
-    <img src="images/thumbnail/010.png" alt="じゅう" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/hR6_Tdismns" class="glightbox" data-gallery="my-work-010" style="display:none;"></a>
+            <a href="images/works/014.png" class="glightbox" data-gallery="my-work-014">
+                <img src="images/thumbnail/014.png" alt="きのこ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/NDlQzo6o_I4" class="glightbox" data-gallery="my-work-014" style="display:none;"></a>
 
+            <a href="images/works/015.png" class="glightbox" data-gallery="my-work-015">
+                <img src="images/thumbnail/015.png" alt="あさると" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/W6h2bYaax4c" class="glightbox" data-gallery="my-work-015" style="display:none;"></a>
 
-<!-- 011-020 -->
-<a href="images/works/011.png" class="glightbox" data-gallery="my-work-011">
-    <img src="images/thumbnail/011.png" alt="ねずみ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/oSs656xwWOw" class="glightbox" data-gallery="my-work-011" style="display:none;"></a>
+            <a href="images/works/016.png" class="glightbox" data-gallery="my-work-016">
+                <img src="images/thumbnail/016.png" alt="つばさ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/LsnZvbVpovk" class="glightbox" data-gallery="my-work-016" style="display:none;"></a>
 
-<a href="images/works/012.png" class="glightbox" data-gallery="my-work-012">
-    <img src="images/thumbnail/012.png" alt="みぎて" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/gpW8Cj2L4XI" class="glightbox" data-gallery="my-work-012" style="display:none;"></a>
+            <a href="images/works/017.png" class="glightbox" data-gallery="my-work-017">
+                <img src="images/thumbnail/017.png" alt="さめ" style="width: 100px; height: auto;">
+            </a>
+            <a href="https://youtu.be/Ibl2_SJrH8c" class="glightbox" data-gallery="my-work-017" style="display:none;"></a>
 
-<a href="images/works/013.png" class="glightbox" data-gallery="my-work-013">
-    <img src="images/thumbnail/013.png" alt="かたな" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/WYcnNgAtpzM" class="glightbox" data-gallery="my-work-013" style="display:none;"></a>
+            <a href="images/works/018.png" class="glightbox" data-gallery="my-work-018">
+                <img src="images/thumbnail/018.png" alt="かれし" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/014.png" class="glightbox" data-gallery="my-work-014">
-    <img src="images/thumbnail/014.png" alt="きのこ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/NDlQzo6o_I4" class="glightbox" data-gallery="my-work-014" style="display:none;"></a>
+            <a href="images/works/019.jpg" class="glightbox" data-gallery="my-work-019">
+                <img src="images/thumbnail/019.png" alt="ことり" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/015.png" class="glightbox" data-gallery="my-work-015">
-    <img src="images/thumbnail/015.png" alt="あさると" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/W6h2bYaax4c" class="glightbox" data-gallery="my-work-015" style="display:none;"></a>
+            <a href="javascript:void(0)" class="puzzle-trigger dark-hover" data-piece="left">
+                <img src="images/thumbnail/020.png" alt="探して" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/016.png" class="glightbox" data-gallery="my-work-016">
-    <img src="images/thumbnail/016.png" alt="つばさ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/LsnZvbVpovk" class="glightbox" data-gallery="my-work-016" style="display:none;"></a>
+            <a href="images/works/021.jpg" class="glightbox" data-gallery="my-work-021">
+                <img src="images/thumbnail/021.png" alt="ことり" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/017.png" class="glightbox" data-gallery="my-work-017">
-    <img src="images/thumbnail/017.png" alt="さめ" style="width: 100px; height: auto;">
-</a>
-<a href="https://youtube.com/shorts/Ibl2_SJrH8c" class="glightbox" data-gallery="my-work-017" style="display:none;"></a>
+            <a href="images/works/022.jpg" class="glightbox" data-gallery="my-work-022">
+                <img src="images/thumbnail/022.png" alt="もり" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/018.png" class="glightbox" data-gallery="my-work-018">
-    <img src="images/thumbnail/018.png" alt="かれし" style="width: 100px; height: auto;">
-</a>
+            <a href="javascript:void(0)" class="puzzle-trigger dark-hover" data-piece="right">
+                <img src="images/thumbnail/023.png" alt="見つけて" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/019.jpg" class="glightbox" data-gallery="my-work-019">
-    <img src="images/thumbnail/019.png" alt="ことり" style="width: 100px; height: auto;">
-</a>
+            <a href="images/works/024.jpg" class="glightbox" data-gallery="my-work-024">
+                <img src="images/thumbnail/024.png" alt="ごはん" style="width: 100px; height: auto;">
+            </a>
 
-<a href="images/works/020.jpg" class="glightbox  dark-hover" data-gallery="my-work-020">
-    <img src="images/thumbnail/020.png" alt="探して" style="width: 100px; height: auto;">
-</a>
+            <a href="images/works/026.jpg" class="glightbox" data-gallery="my-work-026">
+                <img src="images/thumbnail/026.png" alt="きつね" style="width: 100px; height: auto;">
+            </a>
 
+            <a href="images/her/batterfry-letters.png" id="hidden-letter-trigger" class="glightbox" data-gallery="my-secret-letter" style="display: none;">
+                <img src="images/deco/letter01.png" alt="蝶からの手紙" id="hidden-letter-thumb" style="width: 100px; height: auto;">
+            </a>
+        </div>
 
-<!-- 021-030 -->
-<a href="images/works/021.jpg" class="glightbox" data-gallery="my-work-021">
-    <img src="images/thumbnail/021.png" alt="ことり" style="width: 100px; height: auto;">
-</a>
-
-<a href="images/works/022.jpg" class="glightbox" data-gallery="my-work-022">
-    <img src="images/thumbnail/022.png" alt="もり" style="width: 100px; height: auto;">
-</a>
-
-
-<a href="images/works/023.png" class="glightbox dark-hover" data-gallery="my-work-023">
-    <img src="images/thumbnail/023.png" alt="見つけて" style="width: 100px; height: auto;">
-</a>
-
-
-<a href="images/works/024.jpg" class="glightbox" data-gallery="my-work-024">
-    <img src="images/thumbnail/024.png" alt="ごはん" style="width: 100px; height: auto;">
-</a>
-
-
-<a href="images/works/025.png" class="glightbox" data-gallery="my-work-025">
-    <img src="images/thumbnail/025.png" alt="でふぉるめ" style="width: 100px; height: auto;">
-</a>
-
-
-<a href="images/works/026.jpg" class="glightbox" data-gallery="my-work-026">
-    <img src="images/thumbnail/026.png" alt="きつね" style="width: 100px; height: auto;">
-</a>
-
-
-
-
-
-</div>
-         </div>
-        </section>
+    </section>
         
 <section class="bg-section about" id="about">
 
-<div class="footer-wrapper">
-    <div class="footer-decoration">
-        <img src="images/logo/lineleft.png" class="deco-left">
-        <img src="images/logo/linecenter.png" class="deco-center">
-        <img src="images/logo/lineright.png" class="deco-right">
-    </div>
-    
-    <div class="about-text">
-        <a href="https://x.com/hpywedng" target="_blank">
-            <img src="images/deco/x.png" alt="x" style="width: 50px;">
-        </a>
-    </div>
-</div>
-</section>
-    </main>
 
+        <div class="footer-wrapper">
+            <div class="footer-decoration">
+                <img src="images/logo/lineleft.png" class="deco-left">
+                <img src="images/logo/linecenter.png" class="deco-center">
+                <img src="images/logo/lineright.png" class="deco-right">
+            </div>
+            
+        <div id="hidden-door-area" style="display: none; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 40px; opacity: 0; transition: opacity 1.5s ease;">
+            <img id="door-image" src="images/her/hidding-door01.png" alt="隠しトビラ" style="width: 350px;">
+            <div class="door-login" style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.8); padding: 15px; border-radius: 8px;">
+                <p id="door-message" style="margin: 0; color: #333;">トビラには『鍵』がかかっているようだ。</p>
+                <input type="text" id="door-password" placeholder="……『鍵』･･･？" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <button id="door-submit" style="padding: 5px 15px; cursor: pointer;">開く</button>
+            </div>
+        </div>
 
-    <script>
-    const lightbox = GLightbox({
+            <div class="about-text">
+                <a href="https://x.com/hpywedng" target="_blank">
+                    <img src="images/deco/x.png" alt="x" style="width: 50px;">
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // 1. GLightboxの初期化
+    let lightbox = GLightbox({
         selector: '.glightbox'
     });
-</script>
 
+    // ==========================================================================
+    // ギミック：手紙を【閉じた】瞬間に、でふぉるめの2枚目にいちご謎を完全に結合する
+    // ==========================================================================
+    let hasReadLetter = false; // フラグ管理用の変数
+
+    // ライトボックスが「閉じた（close）」イベントを正確にキャッチ
+    lightbox.on('close', () => {
+        // 現在出現している隠し手紙のトリガー要素を取得
+        const letterTrigger = document.getElementById('hidden-letter-trigger');
+        
+        // 手紙が画面上に出現（displayがnoneではない）しており、かつ、まだフラグが立っていない場合
+        if (letterTrigger && letterTrigger.style.display !== 'none' && !hasReadLetter) {
+            hasReadLetter = true; // フラグON
+            
+            // 隔離していた「いちご謎」のaタグを取得
+            const nazoLink = document.getElementById('strawberry-nazo-link');
+            if (nazoLink) {
+                // クラス名とでふぉるめのギャラリー名を付与して結合！
+                nazoLink.classList.add('glightbox');
+                nazoLink.setAttribute('data-gallery', 'my-work-025');
+                
+                // ライトボックスが閉じている安全なタイミングで最新状態を再構築
+                lightbox.reload();
+            }
+        }
+    });
+
+    // 2. IntersectionObserver (スクロールアニメーション用)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('section-title')) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.add('is-active');
+                    observer.unobserve(entry.target);
+                }
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const worksTitle = document.querySelector('.section-title');
+    if (worksTitle) {
+        observer.observe(worksTitle);
+    }
+
+    document.querySelectorAll('.deco-item').forEach(item => {
+        observer.observe(item);
+    });
+
+    // ==========================================================================
+    // 謎解きシステム：純粋な人力オーバーラップドラッグ
+    // ==========================================================================
+    const createQRPieces = () => {
+        if (document.getElementById('qr-piece-left')) return;
+
+        const leftPiece = document.createElement('img');
+        leftPiece.id = 'qr-piece-left';
+        leftPiece.className = 'qr-draggable-piece';
+        leftPiece.src = 'images/deco/qr-left.png';
+        
+        const rightPiece = document.createElement('img');
+        rightPiece.id = 'qr-piece-right';
+        rightPiece.className = 'qr-draggable-piece';
+        rightPiece.src = 'images/deco/qr-right.png';
+
+        document.body.appendChild(leftPiece);
+        document.body.appendChild(rightPiece);
+
+        makeElementDraggable(leftPiece);
+        makeElementDraggable(rightPiece);
+    };
+
+    const makeElementDraggable = (el) => {
+        let offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
+
+        const dragMouseDown = (e) => {
+            e = e || window.event;
+            
+            if (e.touches && e.touches.length > 0) {
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            } else {
+                e.preventDefault();
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+            
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+            document.ontouchend = closeDragElement;
+            document.ontouchmove = elementDrag;
+        };
+
+        const elementDrag = (e) => {
+            e = e || window.event;
+            const currentX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
+            const currentY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
+            
+            offsetX = mouseX - currentX;
+            offsetY = mouseY - currentY;
+            mouseX = currentX;
+            mouseY = currentY;
+            
+            el.style.top = (el.offsetTop - offsetY) + "px";
+            el.style.left = (el.offsetLeft - offsetX) + "px";
+        };
+
+        const closeDragElement = () => {
+            document.onmouseup = null;
+            document.onmousemove = null;
+            document.ontouchend = null;
+            document.ontouchmove = null;
+        };
+
+        el.onmousedown = dragMouseDown;
+        el.ontouchstart = dragMouseDown;
+    };
+
+    let clickedPieces = { left: false, right: false };
+
+    createQRPieces();
+
+    document.querySelectorAll('.puzzle-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+            const pieceSide = this.getAttribute('data-piece');
+            const targetPiece = document.getElementById('qr-piece-' + pieceSide);
+            const worksSection = document.querySelector('.works');
+
+            const butterfly = document.createElement('div');
+            butterfly.className = 'click-butterfly';
+            butterfly.style.left = e.clientX + 'px';
+            butterfly.style.top = e.clientY + 'px';
+            
+            if (pieceSide === 'right') {
+                butterfly.style.transform = 'scaleX(-1)'; 
+            }
+            
+            document.body.appendChild(butterfly);
+            setTimeout(() => { butterfly.remove(); }, 1500);
+
+            if (targetPiece && !clickedPieces[pieceSide]) {
+                clickedPieces[pieceSide] = true;
+                targetPiece.classList.add('spawned');
+
+                if (clickedPieces.left && clickedPieces.right) {
+                    worksSection.classList.remove('bg-step-crack');
+                    worksSection.classList.add('bg-step-mono');
+                } else {
+                    worksSection.classList.add('bg-step-crack');
+                }
+            }
+        });
+    });
+
+    // ==========================================================================
+    // 上部検索窓のキーワード判定 ＋ 手紙＆トビラ出現ギミック
+    // ==========================================================================
+    document.getElementById('search-btn').addEventListener('click', () => {
+        const input = document.getElementById('search-input').value.trim().toLowerCase();
+        
+        // 1. 手紙の判定
+        const letterKeywords = ['手紙', 'てがみ', 'テガミ', 'tegami', 'letter'];
+        // 2. トビラの判定
+        const doorKeywords = ['トビラ', 'とびら', '扉'];
+
+        if (letterKeywords.includes(input)) {
+            alert('手紙が見つかりました…！');
+            const letterTrigger = document.getElementById('hidden-letter-trigger');
+            if (letterTrigger && letterTrigger.style.display === 'none') {
+                letterTrigger.style.display = 'inline-block';
+                lightbox.reload();
+                letterTrigger.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        } 
+        else if (doorKeywords.includes(input)) {
+            alert('どこからか隠しトビラが現れた……');
+            const doorArea = document.getElementById('hidden-door-area');
+            doorArea.style.display = 'flex';
+            setTimeout(() => { doorArea.style.opacity = '1'; }, 50);
+            doorArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } 
+        else if (input !== '') {
+            alert('何も見つからなかった。キーワードが違うようだ…');
+        }
+    });
+
+// ログインボタンのイベント判定
+    document.getElementById('door-submit').addEventListener('click', () => {
+        const input = document.getElementById('door-password').value.trim().toLowerCase();
+        const correctKeys = ['鍵', 'カギ', 'かぎ', 'key'];
+
+        if (correctKeys.includes(input)) {
+            // 正解の場合：扉から少女が出てくる演出
+            alert("……うん、そう。『鍵』であくの、、、。");
+            const doorImg = document.getElementById('door-image'); // imgタグにこのIDを振ってください
+            if (doorImg) {
+                doorImg.src = "images/her/girl-coming-out.png"; // トビラが開く
+            }
+
+            // 2. ★追加：文章を切り替え！
+        const doorMessage = document.getElementById('door-message');
+        if (doorMessage) {
+            doorMessage.textContent = "どこかにお礼の手紙が届いたようです。";
+
+        }
+
+        } else {
+            // 不正解の場合
+            alert(input + " では開かないの……");
+        }
+    });
+</script>
 </body>
+</html>

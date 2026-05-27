@@ -1,13 +1,21 @@
 /* --- スマホなど、画面が縦長（幅が狭い）のときの指示 --- */
 @media (max-width: 767px) {
     .easel-container {
-        display: none; /* ここでイーゼル（と中身の動画）を消す */
+        display: none;
     }
-    
-    /* 必要であればキャラクター画像だけ中央に寄せる */
     .main-02 {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .deco-flag, 
+    .deco-flag02, 
+    .deco-cafe02, 
+    .deco-cafe04,
+    .deco-cafe01 {
+        display: none;
     }
 }
 
@@ -17,127 +25,216 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px; /* ここで高さを50pxに固定 */
+    height: 50px;
     background-color: #ffffff;
     z-index: 1000;
-    
     display: flex;
-    justify-content: space-between; /* ロゴとメニューを両端へ */
-    align-items: center;            /* 縦方向のど真ん中へ */
-    
-    padding: 0 20px;                /* 左右の余白は固定値で指定 */
-    box-sizing: border-box;         /* paddingを含めて50pxにする重要設定 */
-    flex-wrap: nowrap;              /* 絶対に折り返さない */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .logo {
-    white-space: nowrap;            /* ロゴも折り返させない */
+    white-space: nowrap;
     font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.nav-links {
+.search-box {
     display: flex;
-    list-style: none;
-    gap: 15px;                      /* リンク間の隙間を少し詰める */
-    margin: 0;                      /* 余計な隙間を削除 */
-    padding: 0;
-    white-space: nowrap;            /* メニューも折り返させない */
+    align-items: center;
+    gap: 6px;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #333;
+#search-input {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+#search-input:focus {
+    border-color: #a0c0c2;
+    box-shadow: 0 0 4px rgba(160, 192, 194, 0.4);
+}
+
+#search-btn {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 0.9rem;
+    background-color: #a0c0c2;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
 
-/* マウスオーバー時：新緑色 */
-.nav-links a:hover {
-    color: #228b22;                 /* フォレストグリーン（新緑色） */
+#search-btn:hover {
+    background-color: #8faeb0;
 }
 
+#search-btn:active {
+    transform: scale(0.96);
+}
 
-
-/* 1. スクロールの基準となる親要素の設定 */
 html {
     scroll-behavior: smooth;
-    overflow-y: scroll; /* 常にスクロールバーを表示させる */
+    overflow-y: scroll;
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    height: auto; /* ここを固定しない */
+    height: auto;
 }
 
-    /* ライトボックスが開いたときに、さらにズレないように調整 */
-    .glightbox-open {
-        overflow: hidden; /* ライトボックス表示中の無駄なスクロールを止める */
-    }
+.glightbox-open {
+    overflow: hidden;
+}
 
-
-/* 2. mainタグに高さを確保させる */
 main {
     position: relative;
-    /* mainがsectionをすべて囲い込めるようにする */
 }
 
-/* 3. sectionの定義 */
 .bg-section {
     position: sticky;
     top: -3vh;
     height: 100vh;
     width: 100%;
-    z-index: 1; /* heroが一番下になるよう後で調整 */
+    z-index: 1;
     background-size: cover;
     background-position: center;
-
 }
 
-/* 4. 重なりの順番 */
-.hero { z-index: 10; 
+.hero {
+    z-index: 10; 
     background-image: url('images/backimage/bg01.jpg');
     background-size: cover;
     background-position: center;
-    margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
-    padding-top: 20px; /* 必要に応じてさらに余白を追加 */
+    margin-top: 50px;
+    padding-top: 20px;
 }
 
-.works { z-index: 50; 
+.works { 
+    z-index: 50; 
     background-image: url('images/backimage/bg02.jpg');
     background-size: cover;
     background-position: center;
-    margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
-    padding-top: 20px; /* 必要に応じてさらに余白を追加 */
-        /* 境界線をぼかして溶け込ませる */
+    margin-top: 50px;
+    padding-top: 20px;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
+    transition: background 0.5s ease;
 }
 
 .about {
+    position: relative;
     z-index: 100;
-    /* 画像とグラデーションを削除 */
     background-image: none; 
-    background-color: #abc592; /* 明るい若葉色 */
-    
-    /* マスクを解除 */
+    background-color: #a0c0c2;
     -webkit-mask-image: none;
     mask-image: none;
-    
-    /* 領域の高さを抑える */
     height: auto; 
-    min-height: 75px; /* 4行分くらいの高さを確保 */
-    padding: 40px 20px;
-    
-    /* 柔軟に配置 */
+    min-height: 60vh;
+    padding: 80px 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    
     margin-top: 50px;
 }
-/* hero---------------------------------------------------- */
+
+.deco-flag {
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    width: 20%;
+    z-index: 19;
+    pointer-events: none;
+}
+
+.deco-flag02 {
+    position: absolute;
+    top: -15%;
+    left: 33%;
+    width: 20%;
+    z-index: 19;
+    transform: rotate(-23deg) scaleX(-1);
+    pointer-events: none;
+}
+
+.deco-effect {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    z-index: 40;
+    pointer-events: none;
+}
+
+.deco-cafe02 {
+    position: absolute;
+    bottom: 7%;
+    left: 6%;
+    width: 15%;
+    z-index: 999;
+    pointer-events: none;
+    animation: sway 4s ease-in-out infinite;
+    transform-origin: bottom right;
+}
+
+@keyframes sway {
+    0% { transform: rotate(-15deg); }
+    50% { transform: rotate(-30deg); }
+    100% { transform: rotate(-15deg); }
+}
+
+.deco-cafe01 {
+    position: absolute;
+    top: -180px;
+    left: 11%;
+    width: 15%;
+    z-index: 3;
+    pointer-events: none;
+    animation: sway-left-top01 4s ease-in-out infinite;
+    transform-origin: bottom left;
+}
+
+@keyframes sway-left-top01 {
+    0% { transform: rotate(20deg); }
+    50% { transform: rotate(35deg); }
+    100% { transform: rotate(20deg); }
+}
+
+.deco-cafe04 {
+    position: absolute;
+    top: 20px;
+    right: 6%;
+    width: 15%;
+    z-index: 3;
+    pointer-events: none;
+    animation: sway-left-top02 4s ease-in-out infinite;
+    transform-origin: top left;
+}
+
+@keyframes sway-left-top02 {
+    0% { transform: rotate(-10deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(-10deg); }
+}
+
 .hero-main {
     display: flex;
     justify-content: center;
@@ -146,179 +243,191 @@ main {
     width: 95%;
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 60px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
+    margin-top: 60px;
 }
 
-/* イーゼルと動画を包む箱 */
 .easel-container {
-    position: relative; /* 子要素（動画）を上に乗せるための基準点 */
-    width: 47%;         /* イーゼルの幅をここで一括管理 */
+    position: relative;
+    width: 47%;
+    z-index: 20;
 }
 
 .easel-container .main-01 {
-    position: relative; /* 子要素（動画）を上に乗せるための基準点 */
-    width: 100%;         /* イーゼルの幅をここで一括管理 */
+    position: relative;
+    width: 100%;
 }
 
-/* 動画をイーゼル内に配置 */
 .easel-video-wrap {
-    position: absolute; /* 親箱の左上に固定 */
-    top: 17%;    /* 数値を大きくすると下に移動します */
-    left: 20%;  /* 数値を大きくすると右に移動します */
-    
-    width: 90%;
+    position: absolute;
+    top: 13%;
+    left: 23%;
+    width: 95%;
     aspect-ratio: 9 / 16;
     overflow: hidden;
-    z-index: 11;
+    z-index: 20;
 }
 
-        /* iframe（YouTubeそのもの）への絶対命令 */
-        .easel-video-wrap iframe {
-            width: 58%;
-            height: 58%;
-            /* 動画の比率を保ったまま、箱の中に収める */
-            object-fit: contain; 
-            border: none;
-        }
+.easel-video-wrap iframe {
+    width: 58%;
+    height: 58%;
+    object-fit: contain; 
+    border: none;
+}
 
-    /* キャラクターのサイズ指定 */
-    .hero-main .main-02 {
-        width: 53%;       /* 幅をイーゼルより少し大きく） */
-        height: auto;
-        transition: transform 0.3s ease; /* 動きを滑らかにする */
-    }
+.hero-main .main-02 {
+    width: 53%;
+    height: auto;
+    transition: transform 0.3s ease;
+    z-index: 20;
+}
 
-    /* マウスが乗ったとき（:hover）の挙動 */
-    .hero-main .main-02:hover {
-        animation: herojump 0.4s ease; /* jumpという名前のアニメーションを実行 */
-    }
+.hero-main .main-02:hover {
+    animation: herojump 0.4s ease;
+}
 
-    /* 動きの正体（キーフレーム） */
-    @keyframes herojump {
-        0% { transform: translateY(0) scale(1) ; }       /* 元の位置 */
-        50% { transform: translateY(-20px) scale(1.02) ; }  /* 20px上に跳ねる */
-        100% { transform: translateY(0) scale(1) ; }     /* 元に戻る */
-    }
-    
-
-/* works------------------------------------------------- */
+@keyframes herojump {
+    0% { transform: translateY(0) scale(1) ; }
+    50% { transform: translateY(-20px) scale(1.02) ; }
+    100% { transform: translateY(0) scale(1) ; }
+}
 
 .section-title {
-    /* フォント設定：モダンなブロック体 */
     font-family: 'Noto Sans JP';
-    font-size: 2.5rem;       /* サイズはお好みで調整してください */
-    letter-spacing: 0.1em; /* 文字間隔を広げてスタイリッシュに */
-    
-    position: absolute;   /* 親（work-logo）の中で浮かせます */
-    margin: 0;            /* デフォルトの余白を消す */
-    left: 50%;                 /* 画面の50%の地点を起点にする */
-
-    top: -30px;          /* ここを基準に上下させます */
-    margin-top: 0;     /* marginはリセット */
-
-
-
-    transform: translateX(-50%); /* 自分の幅の半分だけ左にずらす */
-    /* 文字の色 */
+    font-size: 2.5rem;       
+    letter-spacing: 0.1em; 
+    position: absolute;   
+    margin: 0;            
+    left: 50%;                 
+    top: -30px;          
     color: #ffffff; 
-    
-    /* 影の設定：彩度の低い濃緑、透明度40% */
-    /* text-shadow: 横 縦 ぼかし色 */
     text-shadow: 0px 4px 0px rgba(0, 100, 0, 0.4); 
-    
-    /* 中央寄せしたい場合 */
     text-align: center;
     margin: 20px 0;
 }
 
-    .work-logo {
+.work-logo {
     position: relative;
     display: flex;
-    justify-content: center; /* 横方向の中央揃え */
-    align-items: center;      /* 縦方向の中央揃え（必要であれば） */
-
-     margin-top: 120px;  
-
-    }
-
-
-
-    /* ラインのサイズ指定 */
-    .work-logo .deco-line {
-        width: 500px;       
-        height: auto;
-        transition: transform 0.3s ease; /* 動きを滑らかにする */
-        flex-shrink: 0;
-    }
-
-    /* ★サムネイルのソート指定 */
-        .works-thumbnail-sort {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 20px 30px;
-        max-width: 950px;
-        margin: 0 auto;
-        margin-top: 50px;  /* ★ヘッダーの高さ分だけ下に押し下げる */
-        
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;  
 }
 
-            /* 1. 通常のサムネイルの状態 */
-            .works-thumbnail-sort a img {
-                /* アニメーションの時間を設定（ふわっと動かすため） */
-                transition: filter 0.3s ease, opacity 0.3s ease; 
-                
-                /* 念のため初期状態を設定 */
-                filter: brightness(100%); 
-                opacity: 1;
-            }
+.section-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px); 
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-            /* 2. サムネイルにカーソルが乗ったとき（ホバー時）の状態 */
-                    /* 1. 通常のサムネイルは白く光る */
-                    .works-thumbnail-sort a:not(.dark-hover):hover img {
-                        filter: brightness(130%);
-                        transform: translateY(1px);
-                        transition: filter 0.3s ease, transform 0.3s ease;
-                    }
+.section-title.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
 
-                    /* 2. dark-hoverクラスを持つリンクだけは暗くなる */
-                    .works-thumbnail-sort a.dark-hover:hover img {
-                        filter: brightness(40%);
-                        transform: translateY(1px);
-                        transition: filter 0.3s ease, transform 0.3s ease;
-                    }
+.work-logo .deco-line {
+    width: 500px;       
+    height: auto;
+    transition: transform 0.3s ease; 
+    flex-shrink: 0;
+}
 
-                    /* 吹き出しの配置 */
-                    .works-thumbnail-sort a {
-                        position: relative; /* 吹き出しを中に置くための基準 */
-                    }
+.works-thumbnail-sort {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px 30px;
+    max-width: 950px;
+    margin: 0 auto;
+    margin-top: 50px;  
+}
 
-                    .tap-bubble {
-                        position: absolute;
-                        top: 5px;   /* サムネイルの上に少しはみ出させる */
-                        left: 6%;
-                        transform: translateX(-50%);
-                        width: 50px;  /* 必要に応じて調整 */
-                        z-index: 51;  /* 画像より上に表示 */
-                        
-                        /* ぴょこぴょこアニメーション */
-                        animation: pyoko 1.5s infinite ease-in-out;
-                    }
+.works-thumbnail-sort a img {
+    transition: filter 0.3s ease, opacity 0.3s ease; 
+    filter: brightness(100%); 
+    opacity: 1;
+}
 
-                    /* アニメーションの定義 */
-                    @keyframes pyoko {
-                        0%, 100% { transform: translateX(-50%) translateY(0); }
-                        50% { transform: translateX(-50%) translateY(-10px); } /* 10px上に跳ねる */
-                    }
-/* about------------------------------------------------- */
+.works-thumbnail-sort a:not(.dark-hover):hover img {
+    filter: brightness(130%);
+    transform: translateY(1px);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.works-thumbnail-sort a.dark-hover:hover img {
+    filter: brightness(40%);
+    transform: translateY(1px);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.works-thumbnail-sort a {
+    position: relative; 
+}
+
+.tap-bubble {
+    position: absolute;
+    top: 5px;   
+    left: 6%;
+    transform: translateX(-50%);
+    width: 50px;  
+    z-index: 51;  
+    animation: pyoko 1.5s infinite ease-in-out;
+}
+
+@keyframes pyoko {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); } 
+}
+
+.deco-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+}
+
+.deco-item {
+    position: absolute;
+    width: 80px; 
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.deco-item.item-01 { top: 5%; left: 5%; }
+.deco-item.item-02 { top: 11%; right: 31%; }
+.deco-item.item-03 { top: 23%; left: 12%; }
+.deco-item.item-04 { top: 73%; left: 18%; width: 110px; }
+.deco-item.item-05 { top: 50%; right: 10%; }
+.deco-item.item-06 { top: 15%; right: 5%; }
+.deco-item.item-07 { top: 72%; right: 22%; }
+.deco-item.char-01 { top: 9%; left: 30%; width: 120px; }
+.deco-item.char-02 { top: 30%; right: 16%; width: 120px; }
+.deco-item.char-03 { top: 45%; left: 6%; width: 150px; }
+
+.deco-inner { width: 100%; display: block; }
+.item-01 .deco-inner { transform: rotate(-10deg); }
+.item-02 .deco-inner { transform: rotate(19deg); }
+.item-03 .deco-inner { transform: rotate(-12deg); }
+.item-04 .deco-inner { transform: rotate(-16deg); }
+.item-05 .deco-inner { transform: rotate(7deg); }
+.item-06 .deco-inner { transform: rotate(-10deg); }
+.item-07 .deco-inner { transform: rotate(15deg); }
+.char-01 .deco-inner { transform: rotate(-10deg); }
+.char-02 .deco-inner { transform: rotate(8deg); }
+.char-03 .deco-inner { transform: rotate(15deg); }
+
+.slide-from-left { transform: translateX(-50px); }
+.slide-from-right { transform: translateX(50px); }
+.deco-item.is-active { opacity: 1; transform: translateX(0); }
 
 .footer-wrapper {
     display: flex;
-    flex-direction: column; /* 【重要】これで縦並びを確定させます */
-    align-items: center;    /* 横方向は中央揃え */
+    flex-direction: column; 
+    align-items: center;    
     width: 100%;
-    margin-top: -60px;      /* 食い込ませる量 */
+    margin-top: -60px;      
 }
 
 .footer-decoration {
@@ -330,9 +439,104 @@ main {
 }
 
 .about-text {
-    margin-top: 7px; /* ラインとXアイコンの距離 */
+    margin-top: 7px; 
 }
 
-/* ライン素材の幅を調整 */
 .deco-left, .deco-right { width: 80px; }
 .deco-center { flex-grow: 1; height: 30px; object-fit: contain; }
+
+.click-butterfly {
+    position: fixed;
+    width: 60px;          
+    height: 60px;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url('images/deco/apng.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: flyAndFade 1.5s ease-out forwards;
+}
+
+@keyframes flyAndFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1) rotate(-5deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-100%, -150%) scale(0.8) rotate(-15deg);
+    }
+}
+
+/* 画面上に落ちてくるQRコードのピース（吸着用の固まるアニメーションや枠線を完全排除） */
+.qr-draggable-piece {
+    position: fixed;
+    top: 50%;
+    width: 250px;      
+    height: 250px;
+    cursor: grab;
+    z-index: 5000;     
+    opacity: 0;
+    transform: translateY(-100px) scale(0.5);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.qr-draggable-piece.spawned {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    pointer-events: auto;
+}
+
+.qr-draggable-piece:active {
+    cursor: grabbing;
+}
+
+/* 初期出現位置（中央付近に少し離して落とす） */
+#qr-piece-left { 
+    left: calc(50% - 280px);
+}
+#qr-piece-right { 
+    left: calc(50% + 30px);
+}
+
+.works.bg-step-crack {
+    background-image: url('images/deco/bg04-01.jpg') !important;
+    background-size: cover;
+    background-position: center;
+}
+
+.works.bg-step-mono {
+    background-image: url('images/deco/bg04-02.jpg') !important;
+    background-size: cover;
+    background-position: center;
+}
+
+/* ==========================================================================
+   手紙（バインダー）のふわふわ・ゆらゆらアニメーション（極上シームレス版）
+   ========================================================================== */
+#hidden-letter-trigger {
+    /* 1往復を6秒かけて、最初と最後をなめらかに繋ぐ */
+    animation: letterFloat 6s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes letterFloat {
+    0% {
+        /* 【スタート】一番下で、左に4度傾いている状態 */
+        transform: translateY(6px) rotate(-4deg);
+    }
+    50% {
+        /* 【折り返し】一番上で、右に4度傾いている状態 */
+        transform: translateY(-8px) rotate(4deg);
+    }
+    100% {
+        /* 【ゴール】一番下に戻り、左に4度傾いている状態（0%と完全に同じ値） */
+        transform: translateY(6px) rotate(-4deg);
+    }
+}
