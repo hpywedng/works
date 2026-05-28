@@ -20,6 +20,65 @@
     }
 }
 
+/* loading--------------------------------------- */
+#loading-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #a0c0c2; z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 1.5s ease;
+}
+
+#loading-text {
+    font-size: 3rem; color: #e0f0f2; font-weight: bold;
+    /* 上品な水色系の発光 */
+    text-shadow: 0 0 8px rgba(224, 240, 242, 0.6), 0 0 15px rgba(160, 192, 194, 0.4);
+    display: flex; gap: 0.5rem;
+}
+
+/* loading-screenの蝶の動きを定義 */
+.butterfly-wrapper {
+    position: absolute;
+    width: 80px; height: 80px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.butterfly-image {
+    width: 100%; height: 100%;
+    background-image: url('images/her/loading-batterfly.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+}
+
+@keyframes butterfly-fly {
+    0% { 
+        opacity: 0; 
+        transform: translateX(-100px) translateY(0px); 
+    }
+    15% { 
+        opacity: 1; /* 15%で完全に現れる */
+    }
+    85% { 
+        opacity: 1; /* 85%まで表示を維持 */
+    }
+    100% { 
+        opacity: 0; /* 最後はふわっと消える */
+        transform: translateX(300px) translateY(0px); 
+    }
+}
+
+.jumping { 
+    display: inline-block !important; 
+    animation: jump 1s ease-in-out infinite; 
+}
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 /* header--------------------------------------- */
 .main-header {
     position: fixed;

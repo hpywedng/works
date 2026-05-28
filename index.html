@@ -9,6 +9,13 @@
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 </head>
 <body>
+    
+<div id="loading-screen">
+    <div id="loading-container">
+        <span id="loading-text">読み込み中…</span>
+        <div id="butterfly-overlay"></div>
+    </div>
+</div>
 
 <header class="main-header">
     <div class="logo">
@@ -201,6 +208,7 @@
                 <a href="images/her/ito_tooshi.png" id="final-present-trigger" class="glightbox" data-gallery="my-secret-letter03">
                     <img src="images/her/cherry-present.png" alt="最後の贈り物" class="floating-letter" style="width: 100px; height: auto;">
                 </a>
+               <a href="images/her/endcard.png" id="final-present-trigger" class="glightbox" data-gallery="my-secret-letter03"></a>
             </div>
         </div>
 
@@ -235,6 +243,64 @@
 </main>
 
 <script>
+window.addEventListener('load', () => {
+    const textEl = document.getElementById('loading-text');
+    if (!textEl) return;
+
+    const originalText = "読み込み中…";
+    const targetText = "HELPME";
+    
+    // 文字をspanに分解（初期クラス：jumping）
+    textEl.innerHTML = originalText.split('').map(c => `<span class="jumping">${c}</span>`).join('');
+    
+    const spans = textEl.querySelectorAll('span');
+    spans.forEach((span, i) => {
+        span.style.animationDelay = `${i * 0.15}s`;
+    });
+
+    // 2.5秒後に蝶を生成
+ // 2.5秒（2500ms）を 1.8秒（1800ms）に変更
+    setTimeout(() => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'butterfly-wrapper';
+        const butterfly = document.createElement('div');
+        butterfly.className = 'butterfly-image';
+        wrapper.appendChild(butterfly);
+        
+        const screen = document.getElementById('loading-screen');
+        screen.appendChild(wrapper); 
+        
+        const rect = textEl.getBoundingClientRect();
+        const screenRect = screen.getBoundingClientRect();
+        
+        wrapper.style.position = 'absolute';
+        wrapper.style.top = `${rect.top - screenRect.top}px`;
+        wrapper.style.left = `${rect.left}px`; 
+        wrapper.style.width = '80px';
+        wrapper.style.height = '80px';
+        wrapper.style.animation = 'butterfly-fly 4.8s ease-in-out forwards';
+
+        // 文字変換のタイミングは蝶の出現から0.8秒後という相対的な関係なので、
+        // ここの数値はそのままで大丈夫です！
+        setTimeout(() => {
+            const newChars = targetText.split('');
+            spans.forEach((span, i) => {
+                span.textContent = newChars[i] || '';
+                span.classList.add('jumping');
+            });
+        }, 3000);
+    }, 1800); // ここを1800に変更しました
+
+    // 終了処理（7.3秒後）
+    setTimeout(() => {
+        const screen = document.getElementById('loading-screen');
+        if (screen) {
+            screen.style.opacity = '0';
+            setTimeout(() => screen.remove(), 1000);
+        }
+    }, 7300);
+});
+
     // ==========================================================================
     // 進行管理用のフラグ
     // ==========================================================================
