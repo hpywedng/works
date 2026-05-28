@@ -190,6 +190,18 @@
             <a href="images/her/batterfry-letters.png" id="hidden-letter-trigger" class="glightbox" data-gallery="my-secret-letter" style="display: none;">
                 <img src="images/deco/letter01.png" alt="蝶からの手紙" id="hidden-letter-thumb" style="width: 100px; height: auto;">
             </a>
+
+            <div id="final-letter-container" style="display: none;">
+                 <a href="images/her/cherry-letters.png" id="final-letter-trigger" class="glightbox" data-gallery="my-secret-letter02">
+                     <img src="images/her/letter02.png" alt="お礼の手紙" class="floating-letter" style="width: 100px; height: auto;">
+                 </a>
+            </div>
+            
+            <div id="final-present-container" style="display: none;">
+                <a href="images/her/ito_tooshi.png" id="final-present-trigger" class="glightbox" data-gallery="my-secret-letter03">
+                    <img src="images/her/cherry-present.png" alt="最後の贈り物" class="floating-letter" style="width: 100px; height: auto;">
+                </a>
+            </div>
         </div>
 
     </section>
@@ -253,11 +265,11 @@
     document.head.appendChild(style);
 
     // ==========================================================================
-    // 高さを計算して適用する関数
+    // 高さを計算して適用する関数（セクションごとに余白調整可能版）
     // ==========================================================================
     function setSectionHeights() {
-        const margin = 70;
-        const updateHeight = (markerId, sectionClass) => {
+        // 引数に余白(margin)を追加しました
+        const updateHeight = (markerId, sectionClass, margin) => {
             const marker = document.getElementById(markerId);
             const section = document.querySelector(sectionClass);
             if (marker && section) {
@@ -265,9 +277,13 @@
                 section.style.height = height + 'px';
             }
         };
-        updateHeight('hero-end-marker', '.hero');
-        updateHeight('works-end-marker', '.works');
+
+        // heroは70、worksは150と個別に指定します
+        updateHeight('hero-end-marker', '.hero', 70);
+        updateHeight('works-end-marker', '.works', 140);
     }
+
+    // 読み込み時とリサイズ時に実行
     window.addEventListener('load', setSectionHeights);
     window.addEventListener('resize', setSectionHeights);
 
@@ -275,9 +291,10 @@
     let lightbox = GLightbox({ selector: '.glightbox' });
 
     // ==========================================================================
-    // ギミック：手紙を【閉じた】瞬間に、いちご謎を結合・トロフィー追加・言葉変更
+    // ギミック：各種モーダルを【閉じた】瞬間の判定
     // ==========================================================================
     lightbox.on('close', () => {
+        // --- 1. 最初の手紙（蝶の手紙）を閉じたときの処理 ---
         const letterTrigger = document.getElementById('hidden-letter-trigger');
         if (letterTrigger && letterTrigger.style.display !== 'none' && !hasReadLetter) {
             hasReadLetter = true;
@@ -299,6 +316,24 @@
 
             // 【条件反映】手紙開封時に「サーチ」に変更
             document.getElementById('search-btn').textContent = 'サーチ';
+        }
+
+        // --- 2. 最後のお礼の手紙を閉じたときに「プレゼント袋」を表示 ---
+        const finalLetterTrigger = document.getElementById('final-letter-trigger');
+        if (finalLetterTrigger) {
+            // 現在開いているスライドの情報を取得して「お礼の手紙」が閉じられたか判定
+            const activeSlide = lightbox.getActiveSlide();
+            const slideImg = activeSlide ? activeSlide.querySelector('img') : null;
+            
+            // お礼の手紙の画像パスが含まれていたらプレゼントを表示
+            if (slideImg && slideImg.src.includes('cherry-letters.png')) {
+                const presentContainer = document.getElementById('final-present-container');
+                if (presentContainer && presentContainer.style.display === 'none') {
+                    presentContainer.style.display = 'block';
+                    // プレゼント表示を反映するために再読み込み
+                    lightbox.reload();
+                }
+            }
         }
     });
 
@@ -409,19 +444,63 @@
         }
     });
 
-    // ログインボタンのイベント判定
-    document.getElementById('door-submit').addEventListener('click', () => {
-        const input = document.getElementById('door-password').value.trim().toLowerCase();
-        if (['鍵', 'カギ', 'かぎ', 'key', 'kagi'].includes(input)) {
-            alert("……うん、そう。『鍵』であくの、、、。");
-            const doorImg = document.getElementById('door-image');
-            if (doorImg) doorImg.src = "images/her/girl-coming-outre.png";
-            const doorMessage = document.getElementById('door-message');
-            if (doorMessage) doorMessage.textContent = "どこかにお礼の手紙が届いたようです。";
-        } else {
-            alert(input + " では開かないの……");
-        }
+// ログインボタンのイベント判定
+document.getElementById('door-submit').addEventListener('click', () => {
+    const input = document.getElementById('door-password').value.trim().toLowerCase();
+    if (['鍵', 'カギ', 'かぎ', 'key', 'kagi'].includes(input)) {
+        alert("……うん、そう。ただの『鍵』であくの……");
+        document.getElementById('door-image').src = "images/her/girl-coming-outre.png";
+        document.getElementById('door-message').textContent = "どこかにお礼の手紙が届いたようです。";
+        
+        // 03のトロフィーを追加
+        addTrophy('images/icon/03cherry.png'); // ファイルパスは実際の場所に合わせてください
+
+        const finalLetter = document.getElementById('final-letter-container');
+        if (finalLetter) finalLetter.style.display = 'block';
+    } else {
+        alert(input + " では開かないの……");
+    }
+});
+
+// パズルピースのクリックイベントの箇所
+document.querySelectorAll('.puzzle-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        // 【追加】クリックした位置に蝶を飛ばす！
+        showButterfly(e.clientX, e.clientY);
+
+        const pieceSide = trigger.getAttribute('data-piece');
+        const targetPiece = document.getElementById(`qr-piece-${pieceSide}`);
+        
+        // ...（既存のパズル処理：if (targetPiece && !clickedPieces[pieceSide]) ...）
     });
+});
+
+// そして、蝶を生成する関数本体をスクリプト内のどこかに定義しておきます
+function showButterfly(x, y) {
+    const butterfly = document.createElement('div');
+    butterfly.className = 'click-butterfly';
+    butterfly.style.left = x + 'px';
+    butterfly.style.top = y + 'px';
+    document.body.appendChild(butterfly);
+    
+    // 1.5秒後に自動削除
+    setTimeout(() => {
+        butterfly.remove();
+    }, 1500);
+}
+
+// ライトボックスが開いたときのイベント
+lightbox.on('open', (target) => {
+    // 04のトロフィー：プレゼント画像（ito_tooshi.png）が開かれた時
+    const activeSlide = lightbox.getActiveSlide();
+    const slideImg = activeSlide ? activeSlide.querySelector('img') : null;
+    
+    // 既に04トロフィーがないか確認してから追加
+    if (slideImg && slideImg.src.includes('ito_tooshi.png')) {
+        addTrophy('images/icon/04itotosi.png'); // ファイルパスを調整してください
+    }
+});
+
 </script>
 </body>
 </html>

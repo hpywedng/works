@@ -550,6 +550,16 @@ main {
     }
 }
 
+/* 揺らめく手紙用 */
+.floating-letter {
+    animation: floating 3s ease-in-out infinite;
+    cursor: pointer;
+}
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 /* サムネイルの親要素を基準点にする（既存のCSSにあるはずですが確認してください） */
 .works-thumbnail-sort a {
     position: relative; 
