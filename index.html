@@ -11,14 +11,18 @@
 <body>
 
 <header class="main-header">
-    <div class="logo">HpyWedng</div>
-    
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="キーワードを入力...">
-        <button id="search-btn">検索</button>
+    <div class="logo">
+        HpyWedng
+         <img src="images/deco/pan.png" class="logo-pan" alt="">
     </div>
+    
+<div class="search-box">
+    <div id="trophy-case" style="display: flex; gap: 8px; margin-right: 10px;"></div>
+    
+    <input type="text" id="search-input" placeholder="キーワードを入力...">
+    <button id="search-btn">検索</button>
+</div>
 </header>
-
 <main>
     <section class="bg-section hero" id="top">
         <img src="images/deco/19flag.png" class="deco-flag" alt="">
@@ -28,7 +32,7 @@
         <img src="images/deco/cafe04.png" class="deco-cafe04" alt="">
         <img src="images/deco/cafe01.png" class="deco-cafe01" alt="">
 
-        <div class="hero-main">
+        <div id="hero-end-marker" class="hero-main">
             <div class="easel-container">
                 <img src="images/deco/18eazel-size-shadow.png" class="main-01">
                 <div class="easel-video-wrap">
@@ -59,7 +63,7 @@
             <h2 class="section-title">WORKS</h2>
         </div>   
 
-        <div class="works-thumbnail-sort">
+        <div id="works-end-marker" class="works-thumbnail-sort">
             <a href="images/works/001.png" class="glightbox" data-gallery="my-work-001">
                 <img src="images/thumbnail/tap50px.png" class="tap-bubble">
                 <img src="images/thumbnail/001.png" alt="ことり" style="width: 100px; height: auto;">
@@ -219,35 +223,82 @@
 </main>
 
 <script>
+    // ==========================================================================
+    // 進行管理用のフラグ
+    // ==========================================================================
+    let hasReadLetter = false; 
+
+    // トロフィーを表示する関数
+    function addTrophy(imagePath) {
+        const trophyCase = document.getElementById('trophy-case');
+        if (trophyCase && !document.querySelector(`img[src="${imagePath}"]`)) {
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.style.height = '25px';
+            img.style.width = 'auto';
+            img.style.animation = 'trophyAppear 0.5s ease-out';
+            trophyCase.appendChild(img);
+        }
+    }
+
+    // トロフィー出現アニメーションの定義
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes trophyAppear {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // ==========================================================================
+    // 高さを計算して適用する関数
+    // ==========================================================================
+    function setSectionHeights() {
+        const margin = 70;
+        const updateHeight = (markerId, sectionClass) => {
+            const marker = document.getElementById(markerId);
+            const section = document.querySelector(sectionClass);
+            if (marker && section) {
+                const height = marker.offsetTop + marker.offsetHeight + margin;
+                section.style.height = height + 'px';
+            }
+        };
+        updateHeight('hero-end-marker', '.hero');
+        updateHeight('works-end-marker', '.works');
+    }
+    window.addEventListener('load', setSectionHeights);
+    window.addEventListener('resize', setSectionHeights);
+
     // 1. GLightboxの初期化
-    let lightbox = GLightbox({
-        selector: '.glightbox'
-    });
+    let lightbox = GLightbox({ selector: '.glightbox' });
 
     // ==========================================================================
-    // ギミック：手紙を【閉じた】瞬間に、でふぉるめの2枚目にいちご謎を完全に結合する
+    // ギミック：手紙を【閉じた】瞬間に、いちご謎を結合・トロフィー追加・言葉変更
     // ==========================================================================
-    let hasReadLetter = false; // フラグ管理用の変数
-
-    // ライトボックスが「閉じた（close）」イベントを正確にキャッチ
     lightbox.on('close', () => {
-        // 現在出現している隠し手紙のトリガー要素を取得
         const letterTrigger = document.getElementById('hidden-letter-trigger');
-        
-        // 手紙が画面上に出現（displayがnoneではない）しており、かつ、まだフラグが立っていない場合
         if (letterTrigger && letterTrigger.style.display !== 'none' && !hasReadLetter) {
-            hasReadLetter = true; // フラグON
+            hasReadLetter = true;
             
-            // 隔離していた「いちご謎」のaタグを取得
             const nazoLink = document.getElementById('strawberry-nazo-link');
             if (nazoLink) {
-                // クラス名とでふぉるめのギャラリー名を付与して結合！
                 nazoLink.classList.add('glightbox');
                 nazoLink.setAttribute('data-gallery', 'my-work-025');
-                
-                // ライトボックスが閉じている安全なタイミングで最新状態を再構築
                 lightbox.reload();
             }
+
+            const targetThumbLink = document.querySelector('a[href="images/works/025.png"]');
+            if (targetThumbLink) {
+                const strawberry = document.createElement('img');
+                strawberry.src = 'images/thumbnail/025-starwberry.png';
+                strawberry.className = 'floating-strawberry';
+                targetThumbLink.appendChild(strawberry);
+            }
+
+            // 【条件反映】手紙開封時に「サーチ」に変更
+            document.getElementById('search-btn').textContent = 'サーチ';
         }
     });
 
@@ -266,129 +317,71 @@
     }, { threshold: 0.1 });
 
     const worksTitle = document.querySelector('.section-title');
-    if (worksTitle) {
-        observer.observe(worksTitle);
-    }
-
-    document.querySelectorAll('.deco-item').forEach(item => {
-        observer.observe(item);
-    });
+    if (worksTitle) observer.observe(worksTitle);
+    document.querySelectorAll('.deco-item').forEach(item => observer.observe(item));
 
     // ==========================================================================
-    // 謎解きシステム：純粋な人力オーバーラップドラッグ
+    // 謎解きシステム：人力ドラッグ
     // ==========================================================================
     const createQRPieces = () => {
         if (document.getElementById('qr-piece-left')) return;
-
-        const leftPiece = document.createElement('img');
-        leftPiece.id = 'qr-piece-left';
-        leftPiece.className = 'qr-draggable-piece';
-        leftPiece.src = 'images/deco/qr-left.png';
-        
-        const rightPiece = document.createElement('img');
-        rightPiece.id = 'qr-piece-right';
-        rightPiece.className = 'qr-draggable-piece';
-        rightPiece.src = 'images/deco/qr-right.png';
-
-        document.body.appendChild(leftPiece);
-        document.body.appendChild(rightPiece);
-
-        makeElementDraggable(leftPiece);
-        makeElementDraggable(rightPiece);
+        ['left', 'right'].forEach(side => {
+            const piece = document.createElement('img');
+            piece.id = 'qr-piece-' + side;
+            piece.className = 'qr-draggable-piece';
+            piece.src = 'images/deco/qr-' + side + '.png';
+            document.body.appendChild(piece);
+            makeElementDraggable(piece);
+        });
     };
 
     const makeElementDraggable = (el) => {
-        let offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
-
-        const dragMouseDown = (e) => {
-            e = e || window.event;
-            
-            if (e.touches && e.touches.length > 0) {
-                mouseX = e.touches[0].clientX;
-                mouseY = e.touches[0].clientY;
-            } else {
-                e.preventDefault();
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }
-            
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-            document.ontouchend = closeDragElement;
-            document.ontouchmove = elementDrag;
+        let mouseX = 0, mouseY = 0;
+        el.onmousedown = el.ontouchstart = (e) => {
+            e.preventDefault();
+            mouseX = e.touches ? e.touches[0].clientX : e.clientX;
+            mouseY = e.touches ? e.touches[0].clientY : e.clientY;
+            document.onmousemove = document.ontouchmove = (e) => {
+                const curX = e.touches ? e.touches[0].clientX : e.clientX;
+                const curY = e.touches ? e.touches[0].clientY : e.clientY;
+                el.style.top = (el.offsetTop - (mouseY - curY)) + "px";
+                el.style.left = (el.offsetLeft - (mouseX - curX)) + "px";
+                mouseX = curX; mouseY = curY;
+            };
+            document.onmouseup = document.ontouchend = () => {
+                document.onmousemove = document.ontouchmove = document.onmouseup = document.ontouchend = null;
+            };
         };
-
-        const elementDrag = (e) => {
-            e = e || window.event;
-            const currentX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
-            const currentY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
-            
-            offsetX = mouseX - currentX;
-            offsetY = mouseY - currentY;
-            mouseX = currentX;
-            mouseY = currentY;
-            
-            el.style.top = (el.offsetTop - offsetY) + "px";
-            el.style.left = (el.offsetLeft - offsetX) + "px";
-        };
-
-        const closeDragElement = () => {
-            document.onmouseup = null;
-            document.onmousemove = null;
-            document.ontouchend = null;
-            document.ontouchmove = null;
-        };
-
-        el.onmousedown = dragMouseDown;
-        el.ontouchstart = dragMouseDown;
     };
 
     let clickedPieces = { left: false, right: false };
-
     createQRPieces();
 
     document.querySelectorAll('.puzzle-trigger').forEach(trigger => {
         trigger.addEventListener('click', function(e) {
-            const pieceSide = this.getAttribute('data-piece');
-            const targetPiece = document.getElementById('qr-piece-' + pieceSide);
+            const side = this.getAttribute('data-piece');
+            clickedPieces[side] = true;
+            document.getElementById('qr-piece-' + side).classList.add('spawned');
+            
             const worksSection = document.querySelector('.works');
-
-            const butterfly = document.createElement('div');
-            butterfly.className = 'click-butterfly';
-            butterfly.style.left = e.clientX + 'px';
-            butterfly.style.top = e.clientY + 'px';
-            
-            if (pieceSide === 'right') {
-                butterfly.style.transform = 'scaleX(-1)'; 
-            }
-            
-            document.body.appendChild(butterfly);
-            setTimeout(() => { butterfly.remove(); }, 1500);
-
-            if (targetPiece && !clickedPieces[pieceSide]) {
-                clickedPieces[pieceSide] = true;
-                targetPiece.classList.add('spawned');
-
-                if (clickedPieces.left && clickedPieces.right) {
-                    worksSection.classList.remove('bg-step-crack');
-                    worksSection.classList.add('bg-step-mono');
-                } else {
-                    worksSection.classList.add('bg-step-crack');
-                }
+            if (clickedPieces.left && clickedPieces.right) {
+                worksSection.classList.remove('bg-step-crack');
+                worksSection.classList.add('bg-step-mono');
+                // 【条件反映】QR合体で「探す」に変更
+                document.getElementById('search-btn').textContent = '探す';
+            } else {
+                worksSection.classList.add('bg-step-crack');
             }
         });
     });
 
     // ==========================================================================
-    // 上部検索窓のキーワード判定 ＋ 手紙＆トビラ出現ギミック
+    // 上部検索窓 ＋ ギミック出現 ＋ トロフィー・ボタン変更
     // ==========================================================================
     document.getElementById('search-btn').addEventListener('click', () => {
         const input = document.getElementById('search-input').value.trim().toLowerCase();
-        
-        // 1. 手紙の判定
         const letterKeywords = ['手紙', 'てがみ', 'テガミ', 'tegami', 'letter'];
-        // 2. トビラの判定
-        const doorKeywords = ['トビラ', 'とびら', '扉'];
+        const doorKeywords = ['トビラ', 'とびら', '扉', 'tobira'];
 
         if (letterKeywords.includes(input)) {
             alert('手紙が見つかりました…！');
@@ -397,6 +390,7 @@
                 letterTrigger.style.display = 'inline-block';
                 lightbox.reload();
                 letterTrigger.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                addTrophy('images/icon/01batterfly.png');
             }
         } 
         else if (doorKeywords.includes(input)) {
@@ -405,34 +399,26 @@
             doorArea.style.display = 'flex';
             setTimeout(() => { doorArea.style.opacity = '1'; }, 50);
             doorArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // 【条件反映】トビラ出現でいちごトロフィー追加 ＋ 言葉を「検索」に戻す
+            addTrophy('images/icon/02starwberry.png');
+            document.getElementById('search-btn').textContent = '検索';
         } 
         else if (input !== '') {
             alert('何も見つからなかった。キーワードが違うようだ…');
         }
     });
 
-// ログインボタンのイベント判定
+    // ログインボタンのイベント判定
     document.getElementById('door-submit').addEventListener('click', () => {
         const input = document.getElementById('door-password').value.trim().toLowerCase();
-        const correctKeys = ['鍵', 'カギ', 'かぎ', 'key'];
-
-        if (correctKeys.includes(input)) {
-            // 正解の場合：扉から少女が出てくる演出
+        if (['鍵', 'カギ', 'かぎ', 'key', 'kagi'].includes(input)) {
             alert("……うん、そう。『鍵』であくの、、、。");
-            const doorImg = document.getElementById('door-image'); // imgタグにこのIDを振ってください
-            if (doorImg) {
-                doorImg.src = "images/her/girl-coming-out.png"; // トビラが開く
-            }
-
-            // 2. ★追加：文章を切り替え！
-        const doorMessage = document.getElementById('door-message');
-        if (doorMessage) {
-            doorMessage.textContent = "どこかにお礼の手紙が届いたようです。";
-
-        }
-
+            const doorImg = document.getElementById('door-image');
+            if (doorImg) doorImg.src = "images/her/girl-coming-outre.png";
+            const doorMessage = document.getElementById('door-message');
+            if (doorMessage) doorMessage.textContent = "どこかにお礼の手紙が届いたようです。";
         } else {
-            // 不正解の場合
             alert(input + " では開かないの……");
         }
     });

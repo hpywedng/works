@@ -9,12 +9,13 @@
     }
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 850px) {
     .deco-flag, 
     .deco-flag02, 
     .deco-cafe02, 
     .deco-cafe04,
-    .deco-cafe01 {
+    .deco-cafe01,
+    .deco-item {
         display: none;
     }
 }
@@ -109,12 +110,14 @@ main {
 
 .bg-section {
     position: sticky;
-    top: -3vh;
-    height: 100vh;
+    top: 0;
     width: 100%;
     z-index: 1;
     background-size: cover;
     background-position: center;
+    /* overflow: hidden;
+    /* 高さを固定せず、最小値だけ確保して、あとはJSで上書きされるのを待つ */
+    min-height: 50vh; 
 }
 
 .hero {
@@ -131,7 +134,7 @@ main {
     background-image: url('images/backimage/bg02.jpg');
     background-size: cover;
     background-position: center;
-    margin-top: 50px;
+    margin-top: -25px; /* パディング分を相殺する */
     padding-top: 20px;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 3%);
@@ -153,7 +156,13 @@ main {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 0px;
+
+    /* ★ここを追加：はみ出しを確実に封じ込める */
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
 }
 
 .deco-flag {
@@ -161,7 +170,7 @@ main {
     top: 3%;
     left: 5%;
     width: 20%;
-    z-index: 19;
+    z-index: 40;
     pointer-events: none;
 }
 
@@ -540,3 +549,39 @@ main {
         transform: translateY(6px) rotate(-4deg);
     }
 }
+
+/* サムネイルの親要素を基準点にする（既存のCSSにあるはずですが確認してください） */
+.works-thumbnail-sort a {
+    position: relative; 
+}
+
+/* 浮かび上がるいちごのスタイル */
+.floating-strawberry {
+    position: absolute;
+    top: -0px;      /* 右上に配置 */
+    right: -0px;
+    width: 30px;     /* いちごのサイズ */
+    height: auto;
+    z-index: 60;     /* サムネイルより手前に */
+    pointer-events: none;
+    animation: strawberryFloat 2s ease-in-out infinite;
+}
+
+@keyframes strawberryFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ロゴのパン画像の調整 */
+.logo {
+    display: flex;         /* 横並びにする */
+    align-items: center;   /* 垂直方向の中央揃え */
+    gap: 8px;              /* 文字との隙間 */
+}
+
+.logo-pan {
+    height: 2rem;        /* フォントサイズと合わせる */
+    width: auto;           /* 比率を維持 */
+    display: block;        /* 余計な隙間を防ぐ */
+}
+
